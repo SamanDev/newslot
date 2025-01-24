@@ -339,12 +339,6 @@ const BlackjackGame = () => {
             setConn(false);
             _auth = null;
         };
-
-        // Cleanup websocket dar zamane unmount kardan component
-        return () => {
-            // socket.close();
-        };
-    
         setTimeout(() => {
             AppOrtion();
 
@@ -352,6 +346,12 @@ const BlackjackGame = () => {
                 spin();
             });
         }, 500);
+        // Cleanup websocket dar zamane unmount kardan component
+        return () => {
+            // socket.close();
+        };
+    
+       
     }, []);
 
     if (_auth == null || !conn || !userData) {
