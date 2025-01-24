@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Checkbox, Segment, Label, LabelDetail, ButtonGroup, Button, ListItem, ListHeader, ListContent, Image, List } from "semantic-ui-react";
 import $ from "jquery";
 
-const rewardsList = [300, 100, 50, 20, 10, 5, 3, 2, 1];
+const rewardsListCount = [300, 100, 50, 20, 10, 5, 3, 2, 1];
 
 const rewardsListIcon = [
     [6, 6, 6],
@@ -15,15 +15,11 @@ const rewardsListIcon = [
     [0, 0, "any"],
     [0, "any", "any"],
 ];
-const doCurrency = (value) => {
-    let val = value?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-    return val;
-};
 const Rewards = ({ bet }) => {
     return (
         <Segment inverted className="rewardlist">
             <List divided inverted verticalAlign="middle">
-                {rewardsList.map(function (x, i) {
+                {rewardsListCount.map(function (x, i) {
                     return (
                         <ListItem key={i} className={"listreward lr" + rewardsListIcon[i][0]}>
                             <Image avatar src={"/imgs/icons/" + rewardsListIcon[i][0] + ".png"} />
@@ -43,15 +39,9 @@ const Rewards = ({ bet }) => {
     );
 };
 
-const LinesButtons = ({ setFunc, valFunc, valSum, max }) => (
-    <ButtonGroup widths="3" style={{ padding:7}}>
-        <Button icon="minus" basic color="red" disabled={valFunc <= valSum ? true : false} onClick={() => setFunc(valFunc - valSum)} />
-        <Button icon="plus" basic color="green" disabled={valFunc >= max ? true : false} onClick={() => setFunc(valFunc + valSum)} />
-        <Button basic inverted content="Max" color="purple" floated="right" disabled={valFunc >= max ? true : false} onClick={() => setFunc(max)} />
-    </ButtonGroup>
-);
 
-const InputExampleRightLabeledTag = ({ balance, animateNum }) => {
+
+const GetControls = ({ balance, animateNum }) => {
     const [line, setLine] = useState(15);
     const [bet, setBet] = useState(5000);
     useEffect(() => {
@@ -87,7 +77,7 @@ const InputExampleRightLabeledTag = ({ balance, animateNum }) => {
             </div>
 
             <Rewards bet={bet} />
-            <Button className="go" color="orange" size="huge" fluid>
+            <Button className="go" color="orange" size="huge" fluid disabled={bet * line> balance?true:false}>
                 Start Spinning...
             </Button>
             <Checkbox label='AUTO SPIN' id="autospin" className="auto" />
@@ -112,5 +102,11 @@ const InputExampleRightLabeledTag = ({ balance, animateNum }) => {
         </Segment>
     );
 };
-
-export default InputExampleRightLabeledTag;
+const LinesButtons = ({ setFunc, valFunc, valSum, max }) => (
+    <ButtonGroup widths="3" style={{ padding:7}}>
+        <Button icon="minus" basic color="red" disabled={valFunc <= valSum ? true : false} onClick={() => setFunc(valFunc - valSum)} />
+        <Button icon="plus" basic color="green" disabled={valFunc >= max ? true : false} onClick={() => setFunc(valFunc + valSum)} />
+        <Button basic inverted content="Max" color="purple" floated="right" disabled={valFunc >= max ? true : false} onClick={() => setFunc(max)} />
+    </ButtonGroup>
+);
+export default GetControls;

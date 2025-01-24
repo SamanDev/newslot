@@ -5,19 +5,6 @@ const doCurrency = (value) => {
     let val = value?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     return val;
 };
-const doCurrencyMil = (value, fix) => {
-    let val;
-    if (value < 1000000) {
-        val = doCurrency(parseFloat(value / 1000).toFixed(fix || fix === 0 ? fix : 0)) + "K";
-    } else {
-        val = doCurrency(parseFloat(value / 1000000).toFixed(fix || fix === 0 ? fix : 1)) + "M";
-        val = val.replace(".0", "");
-    }
-    if (value === 0) {
-        return 0;
-    }
-    return val;
-};
 const ModalExampleScrollingContent = (prop) => {
     const [open, setOpen] = React.useState(false);
 

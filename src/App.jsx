@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { Howl } from "howler";
-import { Popup } from "semantic-ui-react";
-import $ from "jquery";
-import Info from "./components/Info";
 import Loaderr from "./components/Loader";
 import Reels from "./components/Reels";
 import Controls from "./components/Controls";
+import $ from "jquery";
 
 let _auth = null;
 const loc = new URL(window.location);
@@ -17,25 +14,16 @@ if (pathArr.length == 3) {
 }
 //const WEB_URL = process.env.REACT_APP_MODE === "production" ? `wss://${process.env.REACT_APP_DOMAIN_NAME}/` : `ws://${loc.hostname}:8092`;
 const WEB_URL = `wss://slot.wheelofpersia.com/`;
-var r1 = [5, 1, 0, 1, 4, 2, 2, 4, 2, 0, 3, 0, 0, 3, 0, 3, 1, 1, 0, 0, 2, 1, 0, 1, 0, 2, 1, 0, 2, 0, 3, 0, 0, 5, 2, 1, 2, 1, 0, 6, 2, 1, 1, 2, 1, 2, 3, 4, 4, 6, 3, 1, 0, 3, 0, 0, 5, 0, 0, 0, 3, 1];
-var r2 = [0, 4, 4, 2, 3, 0, 1, 3, 3, 1, 2, 0, 3, 0, 6, 2, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 4, 0, 3, 0, 1, 5, 4, 1, 5, 1, 1, 2, 0, 0, 3, 0, 1, 0, 2, 0, 0, 3, 0, 2, 2, 2, 6, 0, 1, 5, 2, 2, 1, 0, 1, 3];
-var r3 = [1, 3, 0, 0, 4, 4, 1, 0, 1, 2, 1, 0, 2, 0, 0, 0, 3, 6, 4, 0, 4, 0, 6, 5, 1, 0, 3, 2, 5, 3, 0, 0, 0, 1, 0, 2, 1, 1, 1, 1, 2, 0, 1, 3, 3, 0, 3, 1, 0, 0, 0, 1, 2, 2, 0, 5, 3, 1, 2, 2, 2, 2];
+const r1 = [5, 1, 0, 1, 4, 2, 2, 4, 2, 0, 3, 0, 0, 3, 0, 3, 1, 1, 0, 0, 2, 1, 0, 1, 0, 2, 1, 0, 2, 0, 3, 0, 0, 5, 2, 1, 2, 1, 0, 6, 2, 1, 1, 2, 1, 2, 3, 4, 4, 6, 3, 1, 0, 3, 0, 0, 5, 0, 0, 0, 3, 1];
+const r2 = [0, 4, 4, 2, 3, 0, 1, 3, 3, 1, 2, 0, 3, 0, 6, 2, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 4, 0, 3, 0, 1, 5, 4, 1, 5, 1, 1, 2, 0, 0, 3, 0, 1, 0, 2, 0, 0, 3, 0, 2, 2, 2, 6, 0, 1, 5, 2, 2, 1, 0, 1, 3];
+const r3 = [1, 3, 0, 0, 4, 4, 1, 0, 1, 2, 1, 0, 2, 0, 0, 0, 3, 6, 4, 0, 4, 0, 6, 5, 1, 0, 3, 2, 5, 3, 0, 0, 0, 1, 0, 2, 1, 1, 1, 1, 2, 0, 1, 3, 3, 0, 3, 1, 0, 0, 0, 1, 2, 2, 0, 5, 3, 1, 2, 2, 2, 2];
 const rewardsList = [300, 100, 50, 20, 10, 5, 3, 2, 1];
 
 const doCurrency = (value) => {
     let val = value?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     return val;
 };
-const doCurrencyMil = (value, fix) => {
-    let val;
-    if (value < 1000000) {
-        val = doCurrency(parseFloat(value / 1000).toFixed(fix || fix == 0 ? fix : 0)) + "K";
-    } else {
-        val = doCurrency(parseFloat(value / 1000000).toFixed(fix || fix == 0 ? fix : 1)) + "M";
-        val = val.replace(".0", "");
-    }
-    return val;
-};
+
 
 function animateNum() {
     $(".counter").each(function () {
@@ -158,25 +146,11 @@ window.parent.postMessage("userget", "*");
 if (window.self == window.top) {
     //window.location.href = "https://www.google.com/";
 }
-let dealingSound = new Howl({
-    src: ["/sounds/dealing_card_fix3.mp3"],
-    volume: 0.5,
-});
 const BlackjackGame = () => {
-    const [lasts, setLasts] = useState([]);
-    const [gamesDataLive, setGamesDataLive] = useState([]);
-    const [gameData, setGameData] = useState(null);
-    const [gamesData, setGamesData] = useState([]); // Baraye zakhire JSON object
-
-    const [gameDataLive, setGameDataLive] = useState(null); // Baraye zakhire JSON object
     const [userData, setUserData] = useState(null);
 
-    const [last, setLast] = useState(false);
-    const [chip, setChip] = useState(50);
-
+   
     const [conn, setConn] = useState(true);
-    const [gameId, setGameId] = useState("Baccarat01");
-    const [gameTimer, setGameTimer] = useState(-1);
     function getCols(reels) {
         var cols = [];
         cols.push([reels[0] - 1, reels[1] - 1, reels[2] - 1]);
@@ -370,9 +344,7 @@ const BlackjackGame = () => {
         return () => {
             // socket.close();
         };
-    }, []);
-
-    useEffect(() => {
+    
         setTimeout(() => {
             AppOrtion();
 
@@ -383,6 +355,7 @@ const BlackjackGame = () => {
     }, []);
 
     if (_auth == null || !conn || !userData) {
+       // return <>hi</>
         return <Loaderr errcon={!userData ? false : true} />;
     }
 
@@ -396,7 +369,7 @@ const BlackjackGame = () => {
                             <Controls balance={userData.balance} animateNum={animateNum} />
                         </div>
                         <div className="box">
-                            <Reels socket={socket} />
+                            <Reels  />
                         </div>
                     </div>
                 </div>

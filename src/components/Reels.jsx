@@ -1,8 +1,6 @@
 import React from "react";
 import { Image, Segment } from "semantic-ui-react";
-import $ from "jquery";
-
-var rewardsList = [];
+/* 
 for (let index = 1; index <= 2; index++) {
     rewardsList.push(6);
 }
@@ -38,14 +36,14 @@ function shuffle(array) {
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
-}
+} */
 //shuffle(rewardsList);
 var r1 = [5, 1, 0, 1, 4, 2, 2, 4, 2, 0, 3, 0, 0, 3, 0, 3, 1, 1, 0, 0, 2, 1, 0, 1, 0, 2, 1, 0, 2, 0, 3, 0, 0, 5, 2, 1, 2, 1, 0, 6, 2, 1, 1, 2, 1, 2, 3, 4, 4, 6, 3, 1, 0, 3, 0, 0, 5, 0, 0, 0, 3, 1];
 var r2 = [0, 4, 4, 2, 3, 0, 1, 3, 3, 1, 2, 0, 3, 0, 6, 2, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 4, 0, 3, 0, 1, 5, 4, 1, 5, 1, 1, 2, 0, 0, 3, 0, 1, 0, 2, 0, 0, 3, 0, 2, 2, 2, 6, 0, 1, 5, 2, 2, 1, 0, 1, 3];
 var r3 = [1, 3, 0, 0, 4, 4, 1, 0, 1, 2, 1, 0, 2, 0, 0, 0, 3, 6, 4, 0, 4, 0, 6, 5, 1, 0, 3, 2, 5, 3, 0, 0, 0, 1, 0, 2, 1, 1, 1, 1, 2, 0, 1, 3, 3, 0, 3, 1, 0, 0, 0, 1, 2, 2, 0, 5, 3, 1, 2, 2, 2, 2];
 
-const Reel = ({ reel, key }) =>
-    rewardsList.map(function (x, i) {
+const Reel = ({ reel }) =>
+    r1.map(function (x, i) {
         return (
             <div className="reel" key={i}>
                 <Image src={"/imgs/icons/" + reel[i] + ".png"} />
@@ -71,7 +69,7 @@ const Lines = () => (
         <Image className="l15" src={"/imgs/lines/15.png"} />
     </div>
 );
-const Reels = ({ reel }) => (
+const ShowReels = ({ reel }) => (
     <>
         <Reel reel={reel} />
         <Reel reel={reel} />
@@ -79,19 +77,19 @@ const Reels = ({ reel }) => (
     </>
 );
 
-const ListExampleDivided = () => (
+const Reels = () => (
     <Segment inverted className="reels">
         <div className="flexreels r1" style={{ top: 0 }}>
-            <Reels reel={r1} />
+            <ShowReels reel={r1} />
         </div>
         <div className="flexreels r2" style={{ top: 0 }}>
-            <Reels reel={r2} />
+            <ShowReels reel={r2} />
         </div>
         <div className="flexreels r3" style={{ top: 0 }}>
-            <Reels reel={r3} />
+            <ShowReels reel={r3} />
         </div>
         <Lines />
     </Segment>
 );
 
-export default ListExampleDivided;
+export default Reels;
