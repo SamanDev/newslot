@@ -324,6 +324,7 @@ const BlackjackGame = () => {
             if (data.method == "connect") {
                 if (data.theClient?.balance >= 0) {
                     setUserData(data.theClient);
+                    animateNum()
                 } else {
                     setUserData(data.theClient);
                     // setConn(false);
