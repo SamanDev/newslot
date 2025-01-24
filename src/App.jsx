@@ -7,7 +7,6 @@ import Info from "./components/Info";
 import Loaderr from "./components/Loader";
 import Reels from "./components/Reels";
 import Controls from "./components/Controls";
-const segments = ["PLAYER", "TIE", "BANKER"];
 
 let _auth = null;
 const loc = new URL(window.location);
