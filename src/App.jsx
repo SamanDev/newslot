@@ -328,6 +328,7 @@ const BlackjackGame = () => {
                     setUserData(data.theClient);
                     // setConn(false);
                     //_auth = null;
+                    animateNum()
                 }
                 // Update kardan state
             }
