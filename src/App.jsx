@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Dimmer, Loader} from "semantic-ui-react";
 
 import Loaderr from "./components/Loader";
 import Reels from "./components/Reels";
@@ -342,12 +343,13 @@ const BlackjackGame = () => {
             _auth = null;
         };
         setTimeout(() => {
+            $('.fload').remove()
             AppOrtion();
 
-            $(".go").on("click", function () {
+            $(".go").removeClass('disabled').on("click", function () {
                 spin();
             });
-        }, 500);
+        }, 1500);
         // Cleanup websocket dar zamane unmount kardan component
         return () => {
             // socket.close();
@@ -363,6 +365,11 @@ const BlackjackGame = () => {
 
     return (
         <>
+        <span className="fload"><Dimmer active>
+            
+                <Loader size="huge" />
+            
+        </Dimmer></span>
             <span id="dark-overlay"></span>
             <div>
                 <div className="game-room" id="scale">

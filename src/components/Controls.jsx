@@ -77,7 +77,7 @@ const GetControls = ({ balance, animateNum }) => {
             </div>
 
             <Rewards bet={bet} />
-            <Button className="go" color="orange" size="huge" fluid disabled={bet * line> balance?true:false}>
+            <Button className="go disabled" color="orange" size="huge" fluid disabled={bet * line> balance?true:false}>
                 Start Spinning...
             </Button>
             <Checkbox label='AUTO SPIN' id="autospin" className="auto" />
