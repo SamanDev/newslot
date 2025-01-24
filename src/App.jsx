@@ -256,6 +256,13 @@ const BlackjackGame = () => {
         return seed;
     }
     function spin() {
+        $("#totalwin").attr("data-count", 0);
+                animateNum();
+                $(".lines img").hide();
+                $("#dark-overlay").addClass("curplayer");
+                $("button").addClass("disabled");
+
+                $(".win").removeClass("win");
         var line = $("#lineval").text();
         var bet = parseInt($("#betval").text());
         const payLoad = {
