@@ -68,8 +68,8 @@ function animateNum() {
     });
 }
 const AppOrtion = () => {
-    let gWidth = $("#root").width() / 1400;
-    let gHight = $("#root").height() / 850;
+    let gWidth = $("#root").width() / 1000;
+    let gHight = $("#root").height() / 650;
     let scale = gWidth < gHight ? gWidth : gHight;
     let highProtect = $("#root").height() * scale;
     //console.log($("#root").width(),$("#root").height());
