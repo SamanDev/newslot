@@ -339,6 +339,10 @@ const BlackjackGame = () => {
                     //_auth = null;
                     animateNum()
                 }
+                setInterval(() => {
+
+                    socket.send(JSON.stringify({ method: "ping" }));
+                }, 15000);
                 // Update kardan state
             }
         };
