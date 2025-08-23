@@ -82,7 +82,7 @@ const AppOrtion = () => {
         // scale = (scale + gHight)/2;
         scale = gHight;
         highProtect = $("#root").height() * scale;
-        let _t = ($("#root").height() - highProtect) / 2;
+        let _t = ($("#root").height() - highProtect) / 4;
         if (_t < 0) {
             _t = _t * -1;
         }
@@ -145,7 +145,7 @@ window.addEventListener(
 window.parent.postMessage("userget", "*");
 
 if (window.self == window.top) {
-    //window.location.href = "https://www.google.com/";
+    window.location.href = "https://www.google.com/";
 }
 const BlackjackGame = () => {
     const [userData, setUserData] = useState(null);
@@ -372,6 +372,7 @@ const BlackjackGame = () => {
     if (_auth == null || !conn || !userData) {
        // return <>hi</>
         return <Loaderr errcon={!userData ? false : true} />;
+   
     }
 
     return (
